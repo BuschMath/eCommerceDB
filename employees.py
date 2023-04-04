@@ -30,7 +30,7 @@ class employees:
         dataEmployee = {"fName": self.fName, "lName": self.lName, "DoB": self.DoB, "SSN": self.ssn,
                 "phoneNo":self.phoneNo}
         db.insert_data("employee", dataEmployee)
-        employeeRow = db.execute_query(f"SELECT employeeID FROM employee WHERE DoB={self.DoB}")
+        employeeRow = db.execute_query(f"SELECT employeeID FROM employee WHERE SSN={self.ssn}")
 
         dataAddress = {"houseNo": self.houseNo, "streetName": self.streetName, "city": self.city,
                        "stateProvidence": self.stateProvidence, "country": self.country}
