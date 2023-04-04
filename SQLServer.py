@@ -30,6 +30,14 @@ class SQLServer:
         except Exception as e:
             print(f"Error executing query: {e}")
 
+    def insert_data(self, table_name, data):
+        cursor = self.cnxn.cursor()
+        columns = ", ".join(data.keys())
+        values = ", ".join("?" * len(data))
+        query = f"INSERT INTO {table_name} ({columns}) VALUES ({values})"
+        cursor.execute(query, tuple(data.values()))
+        self.cnxn.commit()
+
 # Example usage
 #sql_server = SQLServer(server="localhost", database="my_database")
 #sql_server.connect()
