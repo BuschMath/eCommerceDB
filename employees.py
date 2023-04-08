@@ -34,3 +34,7 @@ class employees:
 
         dataAddress = {"houseNo": self.houseNo, "streetName": self.streetName, "city": self.city,
                        "stateProvidence": self.stateProvidence, "country": self.country}
+        
+        db.insert_data("address", dataAddress)
+        addressRow = db.execute_query(f"SELECT addressID FROM address WHERE houseNO={self.houseNo} AND streetName={self.streetName}")
+        
