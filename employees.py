@@ -13,7 +13,7 @@ class employees:
     def createDepartment():
         pass
 
-    def createEmployee(self):
+    def createEmployee(self, db):
         self.fName = ng.nameGenerator.generate_random_name()
         self.lName = ng.nameGenerator.generate_random_name()
         self.DoB = dg.dateGenerator.generate_random_date()
@@ -26,15 +26,19 @@ class employees:
         self.stateProvidence = ag.addressGenerator.generate_random_streetCityStateCountry_name()
         self.country = ag.addressGenerator.generate_random_streetCityStateCountry_name()
 
-    def sendEmployee(self, db):
-        dataEmployee = {"fName": self.fName, "lName": self.lName, "DoB": self.DoB, "SSN": self.ssn,
-                "phoneNo":self.phoneNo}
-        db.insert_data("employee", dataEmployee)
-        employeeRow = db.execute_query(f"SELECT employeeID FROM employee WHERE SSN={self.ssn}")
+        self.sendEmployee(db)
 
-        dataAddress = {"houseNo": self.houseNo, "streetName": self.streetName, "city": self.city,
-                       "stateProvidence": self.stateProvidence, "country": self.country}
-        
-        db.insert_data("address", dataAddress)
-        addressRow = db.execute_query(f"SELECT addressID FROM address WHERE houseNO={self.houseNo} AND streetName={self.streetName}")
-        
+    def sendEmployee(self, db):
+        dataEmployee = [(self.fName, self.lName, self.DoB, self.ssn, self.phoneNo)]
+        columnsEmployee = ["fName","lName","DoB","SSN", "phoneNo"]
+        db.send_data("employee", dataEmployee, columns=columnsEmployee)
+        employeeRow = db.execute_query(f"SELECT employeeID FROM employee WHERE SSN='{self.ssn}'")
+
+        dataAddress = [(self.houseNo, self.streetName, self.city, self.stateProvidence, self.country)]
+        columnsAddress = ["houseNo","streetName","city","stateProvidence","country"]
+        db.send_data("address", dataAddress, columns=columnsAddress)
+        addressRow = db.execute_query(f"SELECT addressID FROM address WHERE houseNO='{self.houseNo}' AND streetName='{self.streetName}'")
+
+        dataRef = [(employeeRow[0][0], addressRow[0][0])]
+        columnRef = ["employeeID", "addressID"]
+        db.send_data("employeeAddressRef", dataRef, columns=columnRef)
