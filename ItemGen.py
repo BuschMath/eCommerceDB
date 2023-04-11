@@ -1,7 +1,7 @@
 import random
 
 class ItemGen:
-    def ItemNameGen():
+    def ItemNameGen(self):
         # Define empty string
         itemName = ""
         
@@ -23,7 +23,7 @@ class ItemGen:
         # Return the randomly generated item name
         return itemName
     
-    def DescriptionGen():
+    def DescriptionGen(self):
         # Define empty string
         desName = ""
         
@@ -45,7 +45,7 @@ class ItemGen:
         # Return the randomly generated item name
         return desName
 
-    def PriceGen():
+    def PriceGen(self):
         min = 1.00
         max =1000000.00
         #return the generated price
@@ -61,4 +61,4 @@ class ItemGen:
         # Generate a random price
         price = self.PriceGen()
 
-        return {"itemName": itemName, "description": desName ,"price": price}
+        return [(itemName, desName ,price)]
