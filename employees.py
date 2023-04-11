@@ -4,6 +4,7 @@ import ssnGenerator as sg
 import phoneNoGenerator as pg
 import addressGenerator as ag
 import SQLServer as sql
+import random as r
 
 class employees:
 
@@ -29,8 +30,8 @@ class employees:
         self.sendEmployee(db)
 
     def sendEmployee(self, db):
-        dataEmployee = [(self.fName, self.lName, self.DoB, self.ssn, self.phoneNo)]
-        columnsEmployee = ["fName","lName","DoB","SSN", "phoneNo"]
+        dataEmployee = [(self.fName, self.lName, self.DoB, self.ssn, self.phoneNo, r.randint(8000, 8006), r.randint(3000, 3009))]
+        columnsEmployee = ["fName","lName","DoB","SSN", "phoneNo", "departmentID", "warehouseID"]
         db.send_data("employee", dataEmployee, columns=columnsEmployee)
         employeeRow = db.execute_query(f"SELECT employeeID FROM employee WHERE SSN='{self.ssn}'")
 
