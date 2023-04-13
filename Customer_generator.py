@@ -31,11 +31,11 @@ def generate_random_phone_number():
 
 
 
-first_name, last_name = generate_random_name()
-number = generate_random_number()
-date = generate_random_date()
-birthdate = generate_random_birthdate()
-phone_number = generate_random_phone_number()
+#first_name, last_name = generate_random_name()
+#number = generate_random_number()
+#date = generate_random_date()
+#birthdate = generate_random_birthdate()
+#phone_number = generate_random_phone_number()
 
 
 '''
@@ -52,4 +52,4 @@ OLD FORMATT
 print(f"{first_name},{last_name},{number},{date},{phone_number},{birthdate}")
 
 '''
-print(f"fName: {first_name}, lName: {last_name}, paymentInfo: {number}, customerJoinDate: {date}, phoneNo: {phone_number}, DoB: {birthdate}")
+#print(f"fName: {first_name}, lName: {last_name}, paymentInfo: {number}, customerJoinDate: {date}, phoneNo: {phone_number}, DoB: {birthdate}")
