@@ -11,6 +11,9 @@ db = sql.SQLServer(server, database)
 
 db.connect()
 
+cg.add_customer_address(db)
+
+'''
 itemGenerator = ig.ItemGen()
 
 # Create item data
@@ -21,7 +24,7 @@ print(itemData)
 for x in range(10000):
     itemData = itemGenerator.CreateItemData()
     db.send_data('items', itemData, columns=["itemName", "decription", "price"])
-
+'''
 '''
 headerArray = ['fName', 'lName', 'paymentInfo',  'customerJoinDate', 'phoneNo', 'DoB' ]
 inputArray = []

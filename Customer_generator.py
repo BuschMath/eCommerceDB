@@ -1,6 +1,7 @@
 import random
 import string
 import datetime
+import addressGenerator as ag
 
 def generate_random_name():
     first_name = ''.join(random.choices(string.ascii_uppercase, k=5))
@@ -29,7 +30,24 @@ def generate_random_phone_number():
     last_four = ''.join(random.choices(string.digits, k=4))
     return f"({area_code}) {first_three}-{last_four}"
 
+def add_customer_address(db):
+    customerData = db.execute_query(f"SELECT customerID FROM customer")
 
+    for customer in customerData:
+        houseNo = ag.addressGenerator.generate_random_house_number()
+        streetName = ag.addressGenerator.generate_random_streetCityStateCountry_name()
+        city = ag.addressGenerator.generate_random_streetCityStateCountry_name()
+        stateProvidence = ag.addressGenerator.generate_random_streetCityStateCountry_name()
+        country = ag.addressGenerator.generate_random_streetCityStateCountry_name()
+
+        dataAddress = [(houseNo, streetName, city, stateProvidence, country)]
+        columnsAddress = ["houseNo","streetName","city","stateProvidence","country"]
+        db.send_data("address", dataAddress, columns=columnsAddress)
+        addressRow = db.execute_query(f"SELECT addressID FROM address WHERE houseNO='{houseNo}' AND streetName='{streetName}'")
+
+        dataRef = [(customer[0], addressRow[0][0])]
+        columnRef = ["customerID", "addressID"]
+        db.send_data("customerAddressRef", dataRef, columns=columnRef)
 
 #first_name, last_name = generate_random_name()
 #number = generate_random_number()
