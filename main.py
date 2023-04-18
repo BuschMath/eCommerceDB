@@ -11,7 +11,8 @@ db = sql.SQLServer(server, database)
 
 db.connect()
 
-cg.add_customer_address(db)
+gen = ig.ItemGen()
+gen.CreateItemLocations(db)
 
 '''
 itemGenerator = ig.ItemGen()

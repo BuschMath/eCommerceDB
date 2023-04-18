@@ -62,3 +62,13 @@ class ItemGen:
         price = self.PriceGen()
 
         return [(itemName, desName ,price)]
+
+    def CreateItemLocations(self, db):
+        itemData = db.execute_query(f"SELECT itemID FROM items")
+
+        for item in itemData:
+            warehouseID = random.randint(3000, 3009)
+            locationID = self.ItemNameGen()
+            data = [(item[0], warehouseID, locationID)]
+            columnRef = ["itemID", "warehouseID", "locationID"]
+            db.send_data("itemLocationRef", data, columns=columnRef)
