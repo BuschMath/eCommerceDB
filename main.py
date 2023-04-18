@@ -3,6 +3,8 @@ import employees as e
 import addressGenerator as ag
 import Customer_generator as cg
 import ItemGen as ig
+import taxGen as tg
+import orderGen as og
 
 server = "localhost\SQLExpress"
 database = "eCommerce"
@@ -11,8 +13,10 @@ db = sql.SQLServer(server, database)
 
 db.connect()
 
-gen = ig.ItemGen()
-gen.CreateItemLocations(db)
+gen = og.orderGen()
+
+for i in range(1, 100000):
+    gen.createOrder(db)
 
 '''
 itemGenerator = ig.ItemGen()
